@@ -199,20 +199,17 @@ class Status(rumps.App):
                 log.warning("Invalid Passphrase for %s", sender.path)
                 continue
 
-            if resp.clicked == gui.SHOW:
+            if resp.clicked == gui.OK:
+                pyperclip.copy(password.split()[0])
+
+            elif resp.clicked == gui.SHOW:
                 gui.show_full_pass_contents(sender.title, password)
+
+            else:
+                log.warning("Unhandled response: %s", resp.clicked)
                 return
 
-            pyperclip.copy(password.split()[0])
             self._recents.add_recent(sender)
-            # NOTE: Seems to show notification in notification center, but doesn't
-            # pop up
-            rumps.notification(
-                title="Password Copied",
-                subtitle="COPIED SUB",
-                message=f"Copied {sender.path.name} to Clipboard",
-            )
-            return
 
 
 def main():
