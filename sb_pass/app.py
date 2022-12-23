@@ -210,6 +210,7 @@ class Status(rumps.App):
                 return
 
             self._recents.add_recent(sender)
+            return
 
 
 def main():
