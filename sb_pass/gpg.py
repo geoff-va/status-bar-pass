@@ -13,7 +13,7 @@ class Gpg:
 
     def decrypt_key(self, path: Path, passphase=None) -> str:
         """Decrypt gpg file using optional passphrase"""
-        kwargs = {"fileobj_or_path": path}
+        kwargs = {"fileobj_or_path": str(path)}
         if passphase:
             kwargs["passphrase"] = passphase
         return str(self._gpg.decrypt_file(**kwargs))
