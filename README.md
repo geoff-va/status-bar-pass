@@ -7,7 +7,7 @@ Just to be safe - be sure you've got a backup of your gpg keys and passwords!
 Download the latest release `.zip` file from the [releases page](https://github.com/geoff-va/status-bar-pass/releases), unzip it and double click the `.app` file. It may indicate the app is from an untrusted developer and not allow you to run it. You can right click and select `open` and choose to run it anyway or you're welcome to build it from source yourself.
 
 ## Prerequisites
-This project uses `python-gngpg` which requires a `gpg` binary to be installed. You will need the path of this binary which can be found by running `which gpg` from a terminal shell.
+This project uses [python-gngpg](https://wiki.python.org/moin/GnuPrivacyGuard) which requires a `gpg` binary to be installed. You will need the path of this binary which can be found by running `which gpg` from a terminal shell.
 
 ## Options and Setup
 The first time you run the application the following default options are used:
@@ -25,7 +25,7 @@ Select the password you want to decrypt from the menu then click `Copy` or `Show
 
 The most recently accessed passwords are shown in the `Recents` menu.
 
-The `gpg` agent is used, so if you've recently entered your decryption password you can click `Copy` or `Show` without entering anything and if it's still cached, it will succeed. Otherwise it will ask you to enter the password again.
+The `gpg` agent is used, so if you've recently entered your decryption password you can click `Copy` or `Show` and if it's still cached, it will succeed. Otherwise it will ask you to enter the password again.
 
 ## Build and Development
 - Clone the repo
