@@ -47,6 +47,7 @@ class Status(rumps.App):
     def create_menu(self, root: Path) -> list[gui.PathMenuItem]:
         """Create the main menu"""
         _quit = rumps.MenuItem("Quit", rumps.quit_application)
+        _reload_menu = rumps.MenuItem("Refresh Password Store", self._reload_menu)
         self.menu.clear()
         self._recents.reset()
         options = self._create_options_entries()
@@ -54,6 +55,7 @@ class Status(rumps.App):
         self.menu = [
             self._recents,
             {"Options": options},
+            _reload_menu,
             None,
             {"Passwords": gpg_keys},
             None,
@@ -101,6 +103,12 @@ class Status(rumps.App):
         if path.is_file() and path.suffix == ".gpg":
             return True
         return False
+
+    def _reload_menu(self, _) -> None:
+        """Reload the menu. Refetches password store"""
+        # TODO: See if we can only refresh the passwords menu instead of everything
+        self.create_menu(Path(self._config.store_home))
+        log.info("Reloaded Menus")
 
     def _set_gpg_home_path_callback(self, _) -> None:
         """Set the gpg home path from user input"""
