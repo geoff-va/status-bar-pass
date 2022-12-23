@@ -2,6 +2,8 @@
 A MacOs Status Bar utility for accessing your `.gpg` encrypted secrets (generated via something like [linux pass](https://formulae.brew.sh/formula/pass))
 
 ## Installation
+Just to be safe - be sure you've got a backup of your gpg keys and passwords!
+
 Download the latest release `.zip` file from the [releases page](https://github.com/geoff-va/status-bar-pass/releases), unzip it and double click the `.app` file. It may indicate the app is from an untrusted developer and not allow you to run it. You can right click and select `open` and choose to run it anyway or you're welcome to build it from source yourself.
 
 ## Prerequisites
