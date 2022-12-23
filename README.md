@@ -34,3 +34,6 @@ The `gpg` agent is used, so if you've recently entered your decryption password 
 - Build as standalone Release: `python build_app.py py2app`
     - `.app` file will be in `./dist`
 - Run tests: `pytest ./tests`
+
+## Limitations
+It currently does not watch your password-store directory for changes so you can use `Refresh Password Store` to reload the password list.
