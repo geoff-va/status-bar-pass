@@ -4,6 +4,12 @@
 #
 #    pip-compile requirements/dev.in
 #
+altgraph==0.17.3
+    # via
+    #   -r requirements/base.txt
+    #   macholib
+    #   modulegraph
+    #   py2app
 attrs==22.2.0
     # via pytest
 black==22.10.0
@@ -20,6 +26,14 @@ exceptiongroup==1.0.4
     # via pytest
 iniconfig==1.1.1
     # via pytest
+macholib==1.16.2
+    # via
+    #   -r requirements/base.txt
+    #   py2app
+modulegraph==0.19.3
+    # via
+    #   -r requirements/base.txt
+    #   py2app
 mypy-extensions==0.4.3
     # via black
 packaging==22.0
@@ -36,12 +50,28 @@ platformdirs==2.6.0
     # via black
 pluggy==1.0.0
     # via pytest
+py2app==0.28.4
+    # via -r requirements/base.txt
+pyobjc-core==9.0.1
+    # via
+    #   -r requirements/base.txt
+    #   pyobjc-framework-cocoa
+pyobjc-framework-cocoa==9.0.1
+    # via
+    #   -r requirements/base.txt
+    #   rumps
+pyperclip==1.8.2
+    # via -r requirements/base.txt
 pytest==7.2.0
     # via
     #   -r requirements/dev.in
     #   pytest-cov
 pytest-cov==4.0.0
     # via -r requirements/dev.in
+python-gnupg==0.5.0
+    # via -r requirements/base.txt
+rumps==0.4.0
+    # via -r requirements/base.txt
 tomli==2.0.1
     # via
     #   black

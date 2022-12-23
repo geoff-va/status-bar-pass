@@ -1,4 +1,4 @@
--c base.txt
+-r base.txt
 
 black==22.10.0
 pytest==7.2.0
