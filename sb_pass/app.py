@@ -25,15 +25,16 @@ class Status(rumps.App):
         self.create_menu(Path(self._config.store_home))
         self._gpg: Gpg | None = None
 
-    def _configure_gpg(self) -> None:
-        """Configure GPG class"""
+    def _configure_gpg(self) -> bool:
+        """Configure GPG class, returning True if correctly configured"""
         binary_path = self._config.gpg_binary_path
         gpg_home_path = self._config.gpg_home
 
         while not Path(binary_path).is_file():
             binary_path = self._get_gpg_binary_path_from_user()
             if binary_path is None:
-                self._show_no_binary_quitting_window()
+                self._show_no_binary_entered()
+                return False
             self._config.gpg_binary_path = binary_path
 
         while not Path(gpg_home_path).is_dir():
@@ -41,6 +42,7 @@ class Status(rumps.App):
             self._config.gpg_home = gpg_home_path
 
         self._gpg = Gpg(gpg_home_path=gpg_home_path, binary_path=binary_path)
+        return True
 
     def create_menu(self, root: Path) -> list[gui.PathMenuItem]:
         """Create the main menu"""
@@ -143,14 +145,13 @@ class Status(rumps.App):
         )
         return result
 
-    def _show_no_binary_quitting_window(self) -> None:
+    def _show_no_binary_entered(self) -> None:
         """Show user a window indicating application will quit b/c of no gpg binary"""
         gui.show_message_with_ok_button(
-            "The GPG Binary is required for use and since none was entered, the "
-            "application will now exit.",
+            "The GPG Binary path is required for use. It will need to bet set before "
+            "you can begin using the application.",
             title="No GPG Binary entered",
         )
-        rumps.quit_application()
 
     def _set_pass_store_dir_callback(self, _) -> None:
         """Get password store dir from user and store it"""
@@ -176,7 +177,9 @@ class Status(rumps.App):
         # Prefer user get to choose GPG/Create dir if it doesn't exist b/c otherwise
         # GPG will create it automatically w/ a bunch of GPG stuff
         if not self._gpg:
-            self._configure_gpg()
+            log.info("NO _gpg")
+            if not self._configure_gpg():
+                return
 
         for attempt_num in range(MAX_ATTEMPTS):
             resp = gui.get_user_passphrase(sender.path, attempt_num + 1, MAX_ATTEMPTS)
